@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+
 def generar_dataset(seed: int = 42) -> pd.DataFrame:
     rng = np.random.default_rng(seed)
 
@@ -23,7 +24,7 @@ def generar_dataset(seed: int = 42) -> pd.DataFrame:
                 for region in regiones:
                     for canal in canales:
                         for prod in productos:
-                            base = 1000 + 50*(anio-2023) + 30*t
+                            base = 1000 + 50 * (anio - 2023) + 30 * t
                             efecto_region = {"Norte": 80, "Centro": 40, "Sur": 20}[region]
                             efecto_canal = {"Tienda": 60, "Online": 30}[canal]
                             efecto_prod = {"A": 70, "B": 40, "C": 10}[prod]
@@ -32,7 +33,17 @@ def generar_dataset(seed: int = 42) -> pd.DataFrame:
                             cantidad = max(1, int(ventas // 50) + rng.integers(-3, 4))
                             rows.append([anio, t, mes, region, canal, prod, cantidad, ventas])
 
-    df = pd.DataFrame(rows, columns=[
-        "Año", "Trimestre", "Mes", "Región", "Canal", "Producto", "Cantidad", "Ventas"
-    ])
+    df = pd.DataFrame(
+        rows,
+        columns=[
+            "Año",
+            "Trimestre",
+            "Mes",
+            "Región",
+            "Canal",
+            "Producto",
+            "Cantidad",
+            "Ventas",
+        ],
+    )
     return df
